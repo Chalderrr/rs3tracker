@@ -16,7 +16,7 @@ class SearchController extends Controller {
 
     public function search(Request $request)
     {
-        
+        return response()->json([$request->all()]);
     }
 
 }
