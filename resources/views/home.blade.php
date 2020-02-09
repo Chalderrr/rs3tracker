@@ -9,4 +9,12 @@
             <h2 class="subtitle">Use the search below to return results for the given name</h2>
         </div>
     </section>
+
+    <section class="section">
+        <div class="container">
+
+            <search-component></search-component>
+
+        </div>
+    </section>
 @endsection
