@@ -24,15 +24,17 @@ class SearchController extends Controller {
 
         $rs3api = new API();
 
-        
+        $char = 'https://apps.runescape.com/runemetrics/profile/profile?user='.$result.'&activities=20';
 
-        try {
-            $player = $rs3api->getProfile($result);
-        } catch (RequestException $e) {
+        dd($char);
 
-        };
+        // try {
+        //     $player = $rs3api->getProfile($result);
+        // } catch (RequestException $e) {
 
-        dd($player);
+        // };
+
+        // dd($rs3api);
         // response in console > message: "Player [test] has their profile set to private"
         //https://gyazo.com/95a1025d4581d81bf9d5617d8dc33550
         // include screenshot of progression with $player dumped into console.
