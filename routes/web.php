@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'SearchController@home');
+Route::post('/search', 'SearchController@search');
