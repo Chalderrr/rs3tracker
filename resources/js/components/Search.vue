@@ -22,7 +22,9 @@
 
             <strong>Output:</strong>
             <ul>
-                <li>{{result.skills}}</li>
+                <li v-for="skill in skills">
+                    <p><strong>{{skill.name}}</strong> {{skill.level}}<small>  <strong>(Virtual Level:)</strong>{{ skill.virtualLevel }}</small></p>
+                </li>
             </ul>
 
         </form>
@@ -49,6 +51,7 @@ export default {
             })
             .then(response => {
                 this.result = response.data;
+                this.skills = response.data.skills;
             })
             .catch(error => {   
                 this.errors = error.response.data.errors;

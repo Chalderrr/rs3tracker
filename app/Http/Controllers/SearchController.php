@@ -30,15 +30,16 @@ class SearchController extends Controller {
         $activities = $player->getActivities();
 
 
+
         $skillsArray = [];
 
         foreach($stats as $skill) {
             
 
-            $skillsArray = [
+            $skillsArray[] = [
                 'name' => $skill->getSkill()->getName(),
                 'level' => $skill->getLevel(),
-                'rank' => $skill->getRank(),
+                'virtualLevel' => $skill->getVirtualLevel(),
             ];
         }
         
@@ -50,10 +51,9 @@ class SearchController extends Controller {
 
         // };
 
-        // dd($stats);
 
         $response = [
-            'combat' => $combat,
+            // 'combat' => $combat,
             'skills' => $skillsArray,
         ];
 
