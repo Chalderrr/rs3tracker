@@ -68,6 +68,11 @@ class SearchController extends Controller {
         // Look more into the api and methods used to publicise private variables, use methods to get required data from $player
         // Tweak response into array, pass specific date to array response instead of ->all()
 
+        // progress 3
+        //https://gyazo.com/92c44c4aab87bab73323bb8b48b7904e
+        // Look further into the api see what different data points are available, start defining more data points and passing them into the $response array to 
+        // be used inside the vue component
+
         return response()->json($response);
     }
 
