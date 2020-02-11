@@ -21,6 +21,8 @@
 
 
             <strong>Output:</strong>
+            {{result}}
+
             <ul>
                 <li v-for="skill in skills">
                     <p><strong>{{skill.name}}</strong> {{skill.level}}<small>  <strong>(Virtual Level:)</strong>{{ skill.virtualLevel }}</small></p>
@@ -41,6 +43,9 @@ export default {
             skills: null,
             rsn: null,
             combat: null,
+            rank: null,
+            totalLevel: null,
+            totalXp: null,
         }
     },
     methods: {
@@ -52,6 +57,10 @@ export default {
             .then(response => {
                 this.result = response.data;
                 this.skills = response.data.skills;
+                this.combat = response.data.combat;
+                this.rank = response.data.rank;
+                this.totalLevel = response.data.totalLevel;
+                this.totalXp = reponse.data.totalXp;
             })
             .catch(error => {   
                 this.errors = error.response.data.errors;
