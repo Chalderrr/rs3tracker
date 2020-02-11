@@ -24,9 +24,25 @@ class SearchController extends Controller {
 
         $rs3api = new API();
 
-        $char = 'https://apps.runescape.com/runemetrics/profile/profile?user='.$result.'&activities=20';
+        $player = $rs3api->getProfile($result);
+        $stats = $player->getStats();
+        $combat = $player->getCombatLevel();
+        $activities = $player->getActivities();
 
-        dd($char);
+
+        $skillsArray = [];
+
+        foreach($stats as $skill) {
+            
+
+            $skillsArray = [
+                'name' => $skill->getSkill()->getName(),
+                'level' => $skill->getLevel(),
+                'rank' => $skill->getRank(),
+            ];
+        }
+        
+        // dd($skill->getLevel());
 
         // try {
         //     $player = $rs3api->getProfile($result);
@@ -34,12 +50,25 @@ class SearchController extends Controller {
 
         // };
 
-        // dd($rs3api);
+        // dd($stats);
+
+        $response = [
+            'combat' => $combat,
+            'skills' => $skillsArray,
+        ];
+
+        //progress 1
         // response in console > message: "Player [test] has their profile set to private"
         //https://gyazo.com/95a1025d4581d81bf9d5617d8dc33550
         // include screenshot of progression with $player dumped into console.
 
-        return response()->json([$request->all()]);
+
+        // progress 2
+        //https://gyazo.com/c12c3388e0a4e898414aa0e910707457
+        // Look more into the api and methods used to publicise private variables, use methods to get required data from $player
+        // Tweak response into array, pass specific date to array response instead of ->all()
+
+        return response()->json($response);
     }
 
 }

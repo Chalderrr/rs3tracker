@@ -21,7 +21,9 @@
 
 
             <strong>Output:</strong>
-            <pre>{{result}}</pre>
+            <ul>
+                <li>{{result.skills}}</li>
+            </ul>
 
         </form>
     </div>
@@ -34,6 +36,9 @@ export default {
             search: '',
             errors: null,
             result: null,
+            skills: null,
+            rsn: null,
+            combat: null,
         }
     },
     methods: {
