@@ -25,7 +25,7 @@
 
             <ul>
                 <li v-for="skill in skills">
-                    <p><strong>{{skill.name}}</strong> {{skill.level}}<small>  <strong>(Virtual Level:)</strong>{{ skill.virtualLevel }}</small></p>
+                    <p><strong>{{skill.name}}:</strong> {{skill.level}} <small><strong>(Virtual Level:)</strong>{{ skill.virtualLevel }}</small></p>
                 </li>
             </ul>
 
@@ -50,20 +50,21 @@ export default {
     },
     methods: {
         submit () {
+            var vm = this;
 
             axios.post('/search', {
                 search: this.search,
             })
             .then(response => {
-                this.result = response.data;
-                this.skills = response.data.skills;
-                this.combat = response.data.combat;
-                this.rank = response.data.rank;
-                this.totalLevel = response.data.totalLevel;
-                this.totalXp = reponse.data.totalXp;
+                vm.result = response.data;
+                vm.skills = response.data.skills;
+                vm.combat = response.data.combat;
+                vm.rank = response.data.rank;
+                vm.totalLevel = response.data.totalLevel;
+                vm.totalXp = reponse.data.totalXp;
             })
             .catch(error => {   
-                this.errors = error.response.data.errors;
+                vm.errors = error.response.data.errors;
             });
         }
     }
