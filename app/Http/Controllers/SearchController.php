@@ -35,7 +35,7 @@ class SearchController extends Controller {
         foreach($activities->getActivities() as $activity) {
             $activitiesArray[] = [
                 // 'date' => $activity->getDate(),
-                'date' => Carbon::instance($activity->getDate()),
+                'date' => Carbon::instance($activity->getDate())->diffForHumans(),
                 'text' => $activity->getText(),
                 'details' => $activity->getDetails()
             ];
