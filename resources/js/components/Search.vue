@@ -1,38 +1,37 @@
 <template>
-    <div>
-        <form @submit.prevent="submit">
+    <div v-if="!result">
 
-            <div class="field">
+        <div class="search">
+            <div class="field" >
                 <label class="label">Search for a Player</label>
                 <div class="control">
                     <input class="input" name="search" type="search" placeholder="Search..." v-model="search">
                 </div>
             </div>
 
-            <div class="field is-grouped">
+        <!-- only call `vm.submit()` when the `key` is `Enter`
+        <input v-on:keyup.enter="submit"> -->
+
                 <div class="control">
-                    <button @click="submit" class="button is-link">Search</button>
+                    <button @click="submit" v-on:keyup.enter="submit" class="button is-link">Search</button>
                 </div>
                 <div class="control">
-                    <button class="button is-link is-light">Reset</button>
+                    <button class="button is-link is-light" @click="reset">Reset</button>
                 </div>
-            </div>     
+        </div>
 
-            {{ activities }}
+    </div>
 
-<ul v-if="errors">
-            <li v-for="error in errors">
-                {{error.join(', ')}}
-            </li>
-        </ul>
+    <div v-else>
+        <div class="result">
+            {{ result.combat }}
 
             <!-- <ul>
                 <li v-for="skill in skills">
                     <p><strong>{{skill.name}}:</strong> {{skill.level}} <small><strong>(Virtual Level:)</strong>{{ skill.virtualLevel }}</small></p>
                 </li>
             </ul> -->
-
-        </form>
+        </div>
     </div>
 </template>
 
@@ -45,15 +44,17 @@ export default {
             result: null,
             skills: null,
             rsn: null,
-            combat: null,
             rank: null,
             totalLevel: null,
             totalXp: null,
             activities: null,
-            player: null,
+            combat: null,
         }
     },
     methods: {
+        reset() {
+            this.result = null;
+        },
         submit () {
             var vm = this;
 
@@ -62,12 +63,13 @@ export default {
             })
             .then(response => {
                 vm.result = response.data;
-                vm.skills = response.data.skills;
-                vm.combat = response.data.combat;
-                vm.rank = response.data.rank;
-                vm.totalLevel = response.data.totalLevel;
-                vm.totalXp = reponse.data.totalXp;
-                vm.activities = response.data.activities;
+                // vm.skills = response.data.skills;
+                // vm.combat = response.data.combat;
+                // vm.rank = response.data.rank;
+                // vm.totalLevel = response.data.totalLevel;
+                // vm.totalXp = reponse.data.totalXp;
+                // vm.activities = response.data.activities;
+                vm.player = response.data;
             })
             .catch(error => {
                 vm.errors = error.response.data.errors;
