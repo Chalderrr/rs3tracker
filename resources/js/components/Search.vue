@@ -18,16 +18,19 @@
                 </div>
             </div>     
 
+            {{ activities }}
 
+<ul v-if="errors">
+            <li v-for="error in errors">
+                {{error.join(', ')}}
+            </li>
+        </ul>
 
-            <strong>Output:</strong>
-            {{result}}
-
-            <ul>
+            <!-- <ul>
                 <li v-for="skill in skills">
                     <p><strong>{{skill.name}}:</strong> {{skill.level}} <small><strong>(Virtual Level:)</strong>{{ skill.virtualLevel }}</small></p>
                 </li>
-            </ul>
+            </ul> -->
 
         </form>
     </div>
@@ -46,6 +49,8 @@ export default {
             rank: null,
             totalLevel: null,
             totalXp: null,
+            activities: null,
+            player: null,
         }
     },
     methods: {
@@ -62,8 +67,9 @@ export default {
                 vm.rank = response.data.rank;
                 vm.totalLevel = response.data.totalLevel;
                 vm.totalXp = reponse.data.totalXp;
+                vm.activities = response.data.activities;
             })
-            .catch(error => {   
+            .catch(error => {
                 vm.errors = error.response.data.errors;
             });
         }
