@@ -41,7 +41,7 @@ class SearchController extends Controller {
             ];
         }
 
-        dd($activitiesArray);
+        // dd($activitiesArray);
 
         // dd($activities->getActivities());
 
@@ -64,7 +64,7 @@ class SearchController extends Controller {
 
 
         $response = [
-            'activites' => $activitiesArray,
+            'activities' => $activitiesArray,
             'skills' => $skillsArray,
             'combat' => $combat,
             'totalLevel' => $stats->getTotalLevel(),
