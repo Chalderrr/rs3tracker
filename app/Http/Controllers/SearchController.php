@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Carbon\Carbon;
 use RuneStat\RS3\API;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\RequestException;
@@ -33,11 +34,14 @@ class SearchController extends Controller {
         $activitiesArray = [];
         foreach($activities->getActivities() as $activity) {
             $activitiesArray[] = [
-                'date' => $activity->getDate(),
+                // 'date' => $activity->getDate(),
+                'date' => Carbon::instance($activity->getDate()),
                 'text' => $activity->getText(),
                 'details' => $activity->getDetails()
             ];
         }
+
+        dd($activitiesArray);
 
         // dd($activities->getActivities());
 
